@@ -1,11 +1,12 @@
+from pydantic import BaseModel
 import pytest
 
-from api_ninjas.base import Result, BaseAPI
+from api_ninjas.base import BaseAPI
 from api_ninjas.dadjokes import DadJokes, DadJokesAPI
 
 
 def test_inheritance():
-    assert issubclass(DadJokes, Result)
+    assert issubclass(DadJokes, BaseModel)
     assert issubclass(DadJokesAPI, BaseAPI)
 
 

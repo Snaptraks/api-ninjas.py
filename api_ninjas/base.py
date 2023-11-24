@@ -1,15 +1,10 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
 
 BASE_URL = "https://api.api-ninjas.com"
-
-
-@dataclass
-class Result:
-    ...
 
 
 class BaseAPI:
     endpoint: str
 
-    def get(self, **kwargs) -> list[Result]:
+    def get(self, **kwargs) -> list[BaseModel]:
         raise NotImplementedError

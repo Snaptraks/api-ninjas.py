@@ -1,11 +1,10 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
 
-from .base import BASE_URL, Result, BaseAPI
+from .base import BASE_URL, BaseAPI
 from .http import HTTP
 
 
-@dataclass
-class Facts(Result):
+class Facts(BaseModel):
     fact: str
 
 
