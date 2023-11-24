@@ -10,17 +10,18 @@ def test_inheritance():
 
 
 def test_get():
-    dad_jokes = FactsAPI.get()
-    assert isinstance(dad_jokes, list)
-    if len(dad_jokes) > 0:
-        assert isinstance(dad_jokes[0], Facts)
-        assert isinstance(dad_jokes[0].fact, str)
+    facts = FactsAPI.get()
+    assert isinstance(facts, list)
+    if len(facts) > 0:
+        assert isinstance(facts[0], Facts)
+        assert isinstance(facts[0].fact, str)
+        assert facts[0].fact != ""
 
 
 def test_get_many():
     n = 2
-    dad_jokes = FactsAPI.get(n)
-    assert len(dad_jokes) == n
+    facts = FactsAPI.get(n)
+    assert len(facts) == n
 
 
 def test_get_too_many():
