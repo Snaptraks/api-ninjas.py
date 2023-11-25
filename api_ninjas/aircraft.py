@@ -1,5 +1,4 @@
 from enum import StrEnum
-from typing import Literal
 
 from pydantic import BaseModel
 
@@ -7,8 +6,6 @@ from .base import BASE_URL, BaseAPI
 from .errors import MissingArgument
 from .http import HTTP
 from .utils import filter_none_values
-
-# EngineType = Literal["piston", "propjet", "jet"]
 
 
 class EngineType(StrEnum):
@@ -96,26 +93,6 @@ class AircraftAPI(BaseAPI):
         if not (1 <= limit <= 30):
             raise ValueError("limit must me between 1 and 30")
 
-        if all(
-            arg is None
-            for arg in (
-                manufacturer,
-                model,
-                engine_type,
-                min_speed,
-                max_speed,
-                min_range,
-                max_range,
-                min_length,
-                max_length,
-                min_height,
-                max_height,
-                min_wingspan,
-                max_wingspan,
-            )
-        ):
-            raise MissingArgument("At least one argument must be specified.")
-
         params = filter_none_values(
             dict(
                 manufacturer=manufacturer,
@@ -131,9 +108,13 @@ class AircraftAPI(BaseAPI):
                 max_height=max_height,
                 min_wingspan=min_wingspan,
                 max_wingspan=max_wingspan,
-                limit=limit,
             )
         )
+
+        if len(params) == 0:
+            raise MissingArgument("...")
+
+        params["limit"] = limit
 
         resp = HTTP.session.get(
             f"{BASE_URL}{cls.endpoint}",
