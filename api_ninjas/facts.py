@@ -28,4 +28,4 @@ class FactsAPI(BaseAPI):
 
         resp = self.session.get(self.url, params={"limit": limit})
 
-        return [Facts(**r) for r in resp.json()]
+        return [Facts(**item) for item in resp.json()]

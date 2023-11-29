@@ -31,6 +31,8 @@ class AirlinesAPI(BaseAPI):
     ) -> list[Airline]:
         """Return a list of up to 10 airline results.
 
+        At least one of the following arguments must be provided:
+
         Args:
             icao: International Civil Aviation Organization (ICAO) 3-character airline code.
             iata: International Air Transport Association (IATA) 2-character airline code.
@@ -51,4 +53,4 @@ class AirlinesAPI(BaseAPI):
 
         resp = self.session.get(self.url, params=params)
 
-        return [Airline(**r) for r in resp.json()]
+        return [Airline(**item) for item in resp.json()]

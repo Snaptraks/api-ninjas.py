@@ -28,4 +28,4 @@ class DadJokesAPI(BaseAPI):
 
         resp = self.session.get(self.url, params={"limit": limit})
 
-        return [DadJokes(**r) for r in resp.json()]
+        return [DadJokes(**item) for item in resp.json()]
