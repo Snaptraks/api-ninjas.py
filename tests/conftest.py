@@ -1,11 +1,10 @@
-from dotenv import dotenv_values
 import pytest
+from dotenv import dotenv_values
 
-import api_ninjas
 
-
-def pytest_runtest_setup(item: pytest.Item):
-    """Setup the token before each test, in case one of them changes it."""
-
-    config = dotenv_values(".env")
-    api_ninjas.set_token(config.get("TOKEN"))
+@pytest.fixture
+def api_token() -> str:
+    env = dotenv_values(".env")
+    token = env.get("TOKEN", "RandomTokenString")
+    assert isinstance(token, str)
+    return token
