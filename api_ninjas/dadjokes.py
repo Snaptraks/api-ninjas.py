@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 
-from .base import BASE_URL, BaseAPI
-from .http import HTTP
+from .base import BaseAPI
 
 
 class DadJokes(BaseModel):
@@ -11,8 +10,7 @@ class DadJokes(BaseModel):
 class DadJokesAPI(BaseAPI):
     endpoint = "/v1/dadjokes"
 
-    @classmethod
-    def get(cls, limit: int = 1) -> list[DadJokes]:
+    def get(self, limit: int = 1) -> list[DadJokes]:
         """Return one (or more) random dad jokes.
 
         Args:
@@ -28,6 +26,6 @@ class DadJokesAPI(BaseAPI):
         if not (1 <= limit <= 10):
             raise ValueError("limit must be between 1 and 10.")
 
-        resp = HTTP.session.get(f"{BASE_URL}{cls.endpoint}", params={"limit": limit})
+        resp = self.session.get(self.url, params={"limit": limit})
 
         return [DadJokes(**r) for r in resp.json()]

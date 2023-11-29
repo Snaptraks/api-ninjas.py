@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 
-from .base import BASE_URL, BaseAPI
-from .http import HTTP
+from .base import BaseAPI
 
 
 class Facts(BaseModel):
@@ -11,8 +10,7 @@ class Facts(BaseModel):
 class FactsAPI(BaseAPI):
     endpoint = "/v1/facts"
 
-    @classmethod
-    def get(cls, limit: int = 1) -> list[Facts]:
+    def get(self, limit: int = 1) -> list[Facts]:
         """Return one (or more) random facts.
 
         Args:
@@ -28,6 +26,6 @@ class FactsAPI(BaseAPI):
         if not (1 <= limit <= 30):
             raise ValueError("limit must me between 1 and 30")
 
-        resp = HTTP.session.get(f"{BASE_URL}{cls.endpoint}", params={"limit": limit})
+        resp = self.session.get(self.url, params={"limit": limit})
 
         return [Facts(**r) for r in resp.json()]

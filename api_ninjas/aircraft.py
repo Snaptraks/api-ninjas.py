@@ -2,9 +2,8 @@ from enum import StrEnum
 
 from pydantic import BaseModel
 
-from .base import BASE_URL, BaseAPI
+from .base import BaseAPI
 from .errors import MissingArgument
-from .http import HTTP
 from .utils import filter_none_values
 
 
@@ -40,9 +39,8 @@ class AircraftAPI(BaseAPI):
 
     endpoint = "/v1/aircraft"
 
-    @classmethod
     def get(
-        cls,
+        self,
         limit: int = 1,
         *,
         manufacturer: str | None = None,
@@ -116,9 +114,6 @@ class AircraftAPI(BaseAPI):
 
         params["limit"] = limit
 
-        resp = HTTP.session.get(
-            f"{BASE_URL}{cls.endpoint}",
-            params=params,
-        )
+        resp = self.session.get(self.url, params=params)
 
         return [Aircraft(**item) for item in resp.json()]

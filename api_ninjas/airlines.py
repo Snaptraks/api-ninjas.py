@@ -1,8 +1,7 @@
 from pydantic import BaseModel
 
-from .base import BASE_URL, BaseAPI
+from .base import BaseAPI
 from .errors import MissingArgument
-from .http import HTTP
 from .utils import filter_none_values
 
 
@@ -23,9 +22,8 @@ class AirlinesAPI(BaseAPI):
 
     endpoint = "/v1/airlines"
 
-    @classmethod
     def get(
-        cls,
+        self,
         *,
         icao: str | None = None,
         iata: str | None = None,
@@ -51,6 +49,6 @@ class AirlinesAPI(BaseAPI):
         if len(params) == 0:
             raise MissingArgument("At least one argument must be passed.")
 
-        resp = HTTP.session.get(f"{BASE_URL}{cls.endpoint}", params=params)
+        resp = self.session.get(self.url, params=params)
 
         return [Airline(**r) for r in resp.json()]

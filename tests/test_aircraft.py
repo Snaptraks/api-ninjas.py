@@ -6,13 +6,18 @@ from api_ninjas.base import BaseAPI
 from api_ninjas.errors import MissingArgument
 
 
+@pytest.fixture
+def aircraft_api(api_token: str) -> AircraftAPI:
+    return AircraftAPI(api_token)
+
+
 def test_inheritance():
     assert issubclass(Aircraft, BaseModel)
     assert issubclass(AircraftAPI, BaseAPI)
 
 
-def test_get():
-    aircrafts = AircraftAPI.get(manufacturer="Airbus")
+def test_get(aircraft_api: AircraftAPI):
+    aircrafts = aircraft_api.get(manufacturer="Airbus")
     assert isinstance(aircrafts, list)
     assert len(aircrafts) > 0
     assert isinstance(aircrafts[0], Aircraft)
@@ -20,27 +25,27 @@ def test_get():
     assert isinstance(aircrafts[0].length_ft, float)
 
 
-def test_engine_type():
-    aircrafts = AircraftAPI.get(engine_type=EngineType.PISTON)
+def test_engine_type(aircraft_api: AircraftAPI):
+    aircrafts = aircraft_api.get(engine_type=EngineType.PISTON)
     assert isinstance(aircrafts[0].engine_type, EngineType)
 
 
-def test_get_many():
+def test_get_many(aircraft_api: AircraftAPI):
     n = 2
-    aircrafts = AircraftAPI.get(n, manufacturer="Airbus")
+    aircrafts = aircraft_api.get(n, manufacturer="Airbus")
     assert len(aircrafts) == n
 
 
-def test_get_too_many():
+def test_get_too_many(aircraft_api: AircraftAPI):
     with pytest.raises(ValueError):
-        AircraftAPI.get(31)
+        aircraft_api.get(31)
 
 
-def test_get_not_enough():
+def test_get_not_enough(aircraft_api: AircraftAPI):
     with pytest.raises(ValueError):
-        AircraftAPI.get(0)
+        aircraft_api.get(0)
 
 
-def test_no_arguments():
+def test_no_arguments(aircraft_api: AircraftAPI):
     with pytest.raises(MissingArgument):
-        AircraftAPI.get()
+        aircraft_api.get()
