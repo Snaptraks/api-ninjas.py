@@ -1,6 +1,6 @@
 from typing import Any
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from .base import BaseAPI
 from .errors import MissingArgument, TooManyArguments
@@ -17,7 +17,7 @@ class AirQuality(BaseModel):
     CO: Pollutant
     PM10: Pollutant
     SO2: Pollutant
-    PM2_5: Pollutant
+    PM2_5: Pollutant = Field(alias="PM2.5")
     O3: Pollutant
     NO2: Pollutant
 
@@ -93,10 +93,5 @@ class AirQualityAPI(BaseAPI):
         resp = self.session.get(self.url, params=params)
 
         airquality_data: dict[str, Any] = resp.json()
-
-        # convert dot "." in key to underscore "_"
-        pm2_5 = airquality_data.pop("PM2.5", None)
-        if pm2_5 is not None:
-            airquality_data["PM2_5"] = pm2_5
 
         return AirQuality(**airquality_data)
