@@ -29,7 +29,8 @@ class AirlinesAPI(BaseAPI):
         iata: str | None = None,
         name: str | None = None,
     ) -> list[Airline]:
-        """Return a list of up to 10 airline results.
+        """
+        Return a list of up to 10 airline results.
 
         At least one of the following arguments must be provided:
 

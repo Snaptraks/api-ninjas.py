@@ -40,7 +40,8 @@ class AirportsAPI(BaseAPI):
         max_elevation: float | None = None,
         offset: int | None = None,
     ) -> list[Airport]:
-        """Return a list of up to 30 airport results.
+        """
+        Return a list of up to 30 airport results.
         Use the offset parameter to access more results if available.
 
         At least one of the following arguments must be provided:

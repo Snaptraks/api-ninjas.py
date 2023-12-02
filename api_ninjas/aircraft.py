@@ -57,7 +57,8 @@ class AircraftAPI(BaseAPI):
         min_wingspan: float | None = None,
         max_wingspan: float | None = None,
     ) -> list[Aircraft]:
-        """Return a list of aircrafts that match the given parameters.
+        """
+        Return a list of aircrafts that match the given parameters.
         This API only supports airplanes - for helicopter specs please use our
         Helicopter API.
 

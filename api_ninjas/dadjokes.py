@@ -11,7 +11,8 @@ class DadJokesAPI(BaseAPI):
     endpoint = "/v1/dadjokes"
 
     def get(self, limit: int = 1) -> list[DadJokes]:
-        """Return one (or more) random dad jokes.
+        """
+        Return one (or more) random dad jokes.
 
         Args:
             limit: How many jokes to return. Must be between 1 and 10. Default is 1.

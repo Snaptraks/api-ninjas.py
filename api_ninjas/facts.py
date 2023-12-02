@@ -11,7 +11,8 @@ class FactsAPI(BaseAPI):
     endpoint = "/v1/facts"
 
     def get(self, limit: int = 1) -> list[Facts]:
-        """Return one (or more) random facts.
+        """
+        Return one (or more) random facts.
 
         Args:
             limit: How many results to return. Must be between 1 and 30. Default is 1.
