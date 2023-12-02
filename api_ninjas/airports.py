@@ -28,6 +28,7 @@ class AirportsAPI(BaseAPI):
 
     def get(
         self,
+        *,
         icao: str | None = None,
         iata: str | None = None,
         name: str | None = None,
