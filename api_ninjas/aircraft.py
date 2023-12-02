@@ -110,7 +110,7 @@ class AircraftAPI(BaseAPI):
         )
 
         if len(params) == 0:
-            raise MissingArgument("At least one argument must be passed.")
+            raise MissingArgument()
 
         params["limit"] = limit
 

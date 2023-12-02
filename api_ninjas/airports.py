@@ -78,8 +78,9 @@ class AirportsAPI(BaseAPI):
                 offset=offset,
             )
         )
+
         if len(params) == 0:
-            raise MissingArgument("At least one argument must be passed.")
+            raise MissingArgument()
 
         resp = self.session.get(self.url, params=params)
 

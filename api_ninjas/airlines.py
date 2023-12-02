@@ -46,10 +46,16 @@ class AirlinesAPI(BaseAPI):
             MissingArgument: If no arguments are passed.
         """
 
-        params = filter_none_values(dict(icao=icao, iata=iata, name=name))
+        params = filter_none_values(
+            dict(
+                icao=icao,
+                iata=iata,
+                name=name,
+            )
+        )
 
         if len(params) == 0:
-            raise MissingArgument("At least one argument must be passed.")
+            raise MissingArgument()
 
         resp = self.session.get(self.url, params=params)
 
