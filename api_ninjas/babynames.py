@@ -25,8 +25,10 @@ class BabyNamesAPI(BaseAPI):
         Return 10 baby name results.
 
         Args:
-            gender:
-            popular_only:
+            gender: Baby name gender. Must be one of the following:
+                Gender.BOY, Gender.GIRL, Gender.NEUTRAL
+            popular_only: Whether to only return popular (top 10%) of names.
+                Must be either True or False. If unset, default is True.
 
         Returns:
             A list of baby names.
