@@ -90,7 +90,7 @@ class AnimalsAPI(BaseAPI):
                 (e.g. fox will match gray fox and red fox)
 
         Returns:
-            A list of Animals
+            A list of Animals.
         """
         resp = self.session.get(self.url, params={"name": name})
 

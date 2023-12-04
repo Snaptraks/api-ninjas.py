@@ -20,7 +20,7 @@ class BucketListAPI(BaseAPI):
         Return a random bucket list idea.
 
         Returns:
-            A BucketList idea
+            A BucketList idea.
         """
 
         resp = self.session.get(self.url)
