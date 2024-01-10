@@ -18,3 +18,10 @@ class TooManyArguments(APINinjaException):
     def __init__(self) -> None:
         message = "Too many conflicting arguments were passed."
         super().__init__(message)
+
+
+class ValueOutOfRange(APINinjaException):
+    """Exception raised when a value is out of the required range."""
+
+    def __init__(self, message: str) -> None:
+        super().__init__(message)
