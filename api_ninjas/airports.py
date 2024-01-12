@@ -59,10 +59,10 @@ class AirportsAPI(BaseAPI):
             offset: Number of results to offset for pagination.
 
         Returns:
-            A list of Airport
+            A list of Airport.
 
         Raises:
-            MissingArgument: If no arguments are passed
+            MissingArgument: If no arguments are passed.
         """
 
         params = filter_none_values(

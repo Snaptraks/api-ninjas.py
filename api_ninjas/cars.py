@@ -80,10 +80,11 @@ class CarsAPI(BaseAPI):
             limit: How many results to return. Must be between 1 and 50. Default is 5.
 
         Returns:
-            A list of Car
+            A list of Car.
 
         Raises:
             ValueOutOfRange: If the provided limit is not between 1 and 50.
+            MissingArgument: If no arguments are passed.
         """
 
         limit_lower, limit_upper = 1, 50
